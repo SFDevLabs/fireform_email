@@ -8,6 +8,7 @@ var sendgrid  = require('sendgrid')(GRID_TOKEN);
 
 var ref = new Firebase("https://fireform.firebaseio.com/emailQNotification");
 
+var lastEmail = ''
 // Retrieve new posts as they are added to our database
 ref.on("child_added", function(snapshot, prevChildKey) {
 	var newPost = snapshot.val();
@@ -30,8 +31,8 @@ ref.on("child_added", function(snapshot, prevChildKey) {
 	  if (err) { return console.error(err); }
 	  console.log(json);
 	});
-
-  	ref.child(snapshot.key()).remove()
+	lastKey = snapshot.key()
+  	ref.child(lastKey).remove()
   
 });
 
@@ -76,6 +77,27 @@ refConfirm.authWithCustomToken(AUTH_TOKEN, function(error, authData) {
   } else {
     console.log("Login Succeeded!", authData);
   }
+});
+
+
+//Lets require/import the HTTP module
+var http = require('http');
+
+//Lets define a port we want to listen to
+const port = process.env.PORT || 3000; 
+
+//We need a function which handles requests and send response
+function handleRequest(request, response){
+    response.end(lastKey);
+}
+
+//Create a server
+var server = http.createServer(handleRequest);
+
+//Lets start our server
+server.listen(PORT, function(){
+    //Callback triggered when server is successfully listening. Hurray!
+    console.log("Server listening on: http://localhost:%s", PORT);
 });
 
 
