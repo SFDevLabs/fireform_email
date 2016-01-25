@@ -3,12 +3,14 @@
 const GRID_TOKEN= process.env.GRID_TOKEN
 const AUTH_TOKEN = process.env.AUTH_TOKEN 
 
+console.log(GRID_TOKEN,AUTH_TOKEN, 'token')
+
 var Firebase = require("firebase");
 var sendgrid  = require('sendgrid')(GRID_TOKEN);
 
 var ref = new Firebase("https://fireform.firebaseio.com/emailQNotification");
 
-var lastEmail = ''
+var lastKey = ''
 // Retrieve new posts as they are added to our database
 ref.on("child_added", function(snapshot, prevChildKey) {
 	var newPost = snapshot.val();
@@ -71,13 +73,13 @@ ref.authWithCustomToken(AUTH_TOKEN, function(error, authData) {
   }
 });
 
-refConfirm.authWithCustomToken(AUTH_TOKEN, function(error, authData) {
-  if (error) {
-    console.log("Login Failed!", error);
-  } else {
-    console.log("Login Succeeded!", authData);
-  }
-});
+// refConfirm.authWithCustomToken(AUTH_TOKEN, function(error, authData) {
+//   if (error) {
+//     console.log("Login Failed!", error);
+//   } else {
+//     console.log("Login Succeeded!", authData);
+//   }
+// });
 
 
 //Lets require/import the HTTP module
