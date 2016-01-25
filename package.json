@@ -1,0 +1,24 @@
+{
+  "name": "fireform_email",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffj/fireform_email.git"
+  },
+  "author": "jeff jenkins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeffj/fireform_email/issues"
+  },
+  "homepage": "https://github.com/jeffj/fireform_email#readme",
+  "dependencies": {
+    "firebase": "^2.4.0",
+    "sendgrid": "^2.0.0"
+  }
+}
